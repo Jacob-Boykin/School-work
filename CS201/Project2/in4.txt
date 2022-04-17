@@ -1,0 +1,13 @@
+cat
+pig
+snake
+cow
+bird
+pig
+dog
+lion
+horse
+cat
+me 
+coyode
+fox

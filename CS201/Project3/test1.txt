@@ -1,0 +1,4 @@
+addContact Tony Stark
+removeContact Peter Parker
+print
+quit
