@@ -5,8 +5,18 @@
 #include <vector>
 
 using namespace std;
-// void printUncomp()
-// {
+void printUncomp(vector<string> words)
+{
+   int count = 0;
+   for(int i = 0; i < words.size(); i++)
+   {
+      for(int k = 0; k < words.at(i).size(); k++)
+      {
+         count++;
+      }
+   }
+
+}
 
 // }
 // void printComp()
@@ -24,25 +34,23 @@ using namespace std;
 
 
 int main(int argc, char *argv[]) {
-   string filename(argv[2]);
-   fstream file(filename);
+
+   string filename = argv[1];
+   ifstream file(filename);
    vector<string> words;
-   string temp, line, reset = "";
-   int size;
-   
+   string line, tempWord;
    while(getline(file, line))
    {
-      temp = reset;
       istringstream iss(line);
-      while(getline(iss, temp, '\t'))
+      if(!line.empty())
       {
-         words.push_back(temp);
+         while(getline(iss, tempWord, '\t'))
+         {
+            words.push_back(tempWord);
+         }
       }
    }
-   size = words.size();
-   for(int i = 0; i < size; i++)
-   {
-      cout << words.at(i) << endl;
-   }
+   printUncomp(words);
+
    return 0;
 }
