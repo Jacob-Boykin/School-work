@@ -7,30 +7,47 @@
 using namespace std;
 void printUncomp(vector<string> words)
 {
+   int size = words.size();
    int count = 0;
-   for(int i = 0; i < words.size(); i++)
+   for(int i = 0; i < size; i++)
    {
-      for(int k = 0; k < words.at(i).size(); k++)
-      {
-         count++;
-      }
+      count += words.at(i).size();
    }
-
+   cout << "Uncompressed length: " << count * 8 <<  " bits" << endl;
 }
 
-// }
-// void printComp()
-// {
+vector<char> uniqueLetters(vector<string> words)
+{
+   vector<char> vec;
+  bool inVec = false;
+  int k = 0;
+    if(vec.empty())
+    {
+      vec.push_back(words.at(0).at(0));
+    }
+    for (int i=0;i<words.size();i++){
+      inVec = false;
+      for(int j = 0; j < words.at(i).size(); j++)
+      {
+         for(int k = 0; k < vec.size(); k++)
+         {
+            if(vec.at(k) == words.at(i).at(j))
+            {
+               inVec = true;
+               cout << vec.at(k) << endl;
+            }
+         }
+         if(inVec == false)
+         {
+            vec.push_back(words.at(i).at(k));
+         }
+      } 
+    }
+        
+    
+  return vec;
+}
 
-// }
-// void printLetters()
-// {
-
-// }
-// int count()
-// {
-
-// }
 
 
 int main(int argc, char *argv[]) {
@@ -42,7 +59,7 @@ int main(int argc, char *argv[]) {
    while(getline(file, line))
    {
       istringstream iss(line);
-      if(!line.empty())
+      if(line != "\n")
       {
          while(getline(iss, tempWord, '\t'))
          {
@@ -51,6 +68,8 @@ int main(int argc, char *argv[]) {
       }
    }
    printUncomp(words);
-
+   cout << "please" << endl;
+   vector<char> letters = uniqueLetters(words);
+   cout << letters.at(0) << endl;
    return 0;
 }
