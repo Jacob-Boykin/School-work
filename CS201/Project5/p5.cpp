@@ -21,11 +21,12 @@ vector<char> uniqueLetters(vector<string> words)
    vector<char> vec;
   bool inVec = false;
   int k = 0;
-    if(vec.empty())
-    {
-      vec.push_back(words.at(0).at(0));
-    }
-    for (int i=0;i<words.size();i++){
+   if(vec.empty())
+   {
+   vec.push_back(words.at(0).at(0));
+   }
+   for (int i=0;i<words.size();i++)
+   {
       inVec = false;
       for(int j = 0; j < words.at(i).size(); j++)
       {
@@ -34,15 +35,15 @@ vector<char> uniqueLetters(vector<string> words)
             if(vec.at(k) == words.at(i).at(j))
             {
                inVec = true;
-               cout << vec.at(k) << endl;
+               break;
             }
          }
          if(inVec == false)
          {
             vec.push_back(words.at(i).at(k));
          }
-      } 
-    }
+      }
+   }
         
     
   return vec;
@@ -59,17 +60,16 @@ int main(int argc, char *argv[]) {
    while(getline(file, line))
    {
       istringstream iss(line);
-      if(line != "\n")
+      while(getline(iss, tempWord, '\t'))
       {
-         while(getline(iss, tempWord, '\t'))
-         {
-            words.push_back(tempWord);
-         }
+         words.push_back(tempWord);
       }
    }
    printUncomp(words);
-   cout << "please" << endl;
    vector<char> letters = uniqueLetters(words);
-   cout << letters.at(0) << endl;
+   for(int i = 0; i < letters.size(); i++)
+   {
+      cout << letters.at(i) << " ";
+   }
    return 0;
 }
