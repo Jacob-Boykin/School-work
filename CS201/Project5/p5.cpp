@@ -18,36 +18,81 @@ void printUncomp(vector<string> words)
 
 vector<char> uniqueLetters(vector<string> words)
 {
-   vector<char> vec;
-  bool inVec = false;
-  int k = 0;
-   if(vec.empty())
+
+   vector<pair<char,int>> table;
+   if(table.empty())
    {
-   vec.push_back(words.at(0).at(0));
+      table.push_back(make_pair(words.at(0).at(0), 1));
    }
-   for (int i=0;i<words.size();i++)
-   {
-      inVec = false;
+   char letter;
+   int count = 0;
+   for (int i = 0; i < words.size(); i++) {
       for(int j = 0; j < words.at(i).size(); j++)
       {
-         for(int k = 0; k < vec.size(); k++)
-         {
-            if(vec.at(k) == words.at(i).at(j))
-            {
-               inVec = true;
-               break;
-            }
+         letter = words.at(i).at(j);
+         count = 0;
+         if (table has key for currentCharacter) {
+            table[currentCharacter] = table[currentCharacter] + 1
          }
-         if(inVec == false)
-         {
-            vec.push_back(words.at(i).at(k));
+         else {
+            table[currentCharacter] = 1
          }
       }
    }
+   return table
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    vector<char> vec;
+//   bool inVec = false;
+//   int k = 0;
+//    if(vec.empty())
+//    {
+//    vec.push_back(words.at(0).at(0));
+//    cout << "agh" << endl;
+//    }
+//    for (int i=0;i<words.size();i++)
+//    {
+//       inVec = false;
+//       for(int j = 0; j < words.at(i).size(); j++)
+//       {
+//          for(int k = 0; k < vec.size(); k++)
+//          {
+//             if(vec.at(k) == words.at(i).at(j))
+//             {
+//                inVec = true;
+//                break;
+//             }
+//          }
+//          if(inVec == false)
+//          {
+//             vec.push_back(words.at(i).at(j));
+//          }
+//       }
+//    }
         
     
-  return vec;
-}
+//   return vec;
+// }
 
 
 
