@@ -3,118 +3,73 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-
 using namespace std;
-void printUncomp(vector<string> words)
+void printUncomp(string content)
 {
-   int size = words.size();
-   int count = 0;
-   for(int i = 0; i < size; i++)
-   {
-      count += words.at(i).size();
-   }
-   cout << "Uncompressed length: " << count * 8 <<  " bits" << endl;
+   
+   cout << "Uncompressed length: " << content.size() * 8 <<  " bits" << endl;
+}
+void printComp(vector<pair<char, int>> letters)
+{
+   
 }
 
-vector<char> uniqueLetters(vector<string> words)
+vector<pair<char, int>> sortingLetters(vector<pair<char, int>> letters)
 {
-
-   vector<pair<char,int>> table;
-   if(table.empty())
+   pair<char, int> temp;
+   for(int i = 0; i < letters.size() - 1; i++)
    {
-      table.push_back(make_pair(words.at(0).at(0), 1));
-   }
-   char letter;
-   int count = 0;
-   for (int i = 0; i < words.size(); i++) {
-      for(int j = 0; j < words.at(i).size(); j++)
+      for(int k = 0; k < letters.size() - i - 1; k++)
       {
-         letter = words.at(i).at(j);
-         count = 0;
-         if (table has key for currentCharacter) {
-            table[currentCharacter] = table[currentCharacter] + 1
-         }
-         else {
-            table[currentCharacter] = 1
+         if(letters.at(k).first > letters.at(k + 1).first)
+         {
+            temp = letters.at(k);
+            letters.at(k) = letters.at(k + 1);
+            letters.at(k + 1) = temp;
          }
       }
    }
-   return table
+   return letters;
 }
 
+int HuffmanTree()
+{
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    vector<char> vec;
-//   bool inVec = false;
-//   int k = 0;
-//    if(vec.empty())
-//    {
-//    vec.push_back(words.at(0).at(0));
-//    cout << "agh" << endl;
-//    }
-//    for (int i=0;i<words.size();i++)
-//    {
-//       inVec = false;
-//       for(int j = 0; j < words.at(i).size(); j++)
-//       {
-//          for(int k = 0; k < vec.size(); k++)
-//          {
-//             if(vec.at(k) == words.at(i).at(j))
-//             {
-//                inVec = true;
-//                break;
-//             }
-//          }
-//          if(inVec == false)
-//          {
-//             vec.push_back(words.at(i).at(j));
-//          }
-//       }
-//    }
-        
-    
-//   return vec;
-// }
-
-
+}
 
 int main(int argc, char *argv[]) {
 
    string filename = argv[1];
    ifstream file(filename);
-   vector<string> words;
-   string line, tempWord;
-   while(getline(file, line))
+   vector<pair<char, int>> letters;
+   char c;
+   bool inLetter = false;
+   stringstream buffer;
+   buffer <<file.rdbuf();
+   string contents(buffer.str());
+   for(int i = 0; i < contents.size(); i++)
    {
-      istringstream iss(line);
-      while(getline(iss, tempWord, '\t'))
+      c = contents[i];
+      inLetter = false;
+      for(int k = 0; k < letters.size(); k++)
       {
-         words.push_back(tempWord);
+         if(c == letters.at(k).first)
+         {
+            letters.at(k).second++;
+            inLetter = true;
+         }
+      }
+      if(inLetter == false)
+      {
+         letters.push_back(make_pair(c, 1));
       }
    }
-   printUncomp(words);
-   vector<char> letters = uniqueLetters(words);
+   printUncomp(contents);
+   printComp(letters);
+   letters = sortingLetters(letters);
    for(int i = 0; i < letters.size(); i++)
    {
-      cout << letters.at(i) << " ";
+      cout <<"'" << letters.at(i).first << "'" << " | " << letters.at(i).second << endl;
    }
    return 0;
 }
