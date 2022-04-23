@@ -4,6 +4,73 @@
 #include <sstream>
 #include <vector>
 using namespace std;
+class Huff
+{
+private:
+   vector<pair<char,int>> letters;
+  
+   int Parent(int i){
+   return(i - 1) / 2;  
+   }
+   
+   int Left(int i)
+   {
+      return (2 * i + 1);
+   }
+   int Right(int i)
+   {
+      return(2 * i + 2);
+   }
+
+   void heapify_down(int i)
+    {
+        int left = Left(i);
+        int right = Right(i);
+ 
+        int largest = i;
+ 
+
+        if (left < letters.size() && letters.at(Left(i)).second > letters.at(i).second) {
+            largest = left;
+        }
+ 
+        if (right < letters.size() && letters.at(Right(i)).second > letters.at(largest).second) {
+            largest = right;
+        }
+ 
+        // swap with a child having greater value and
+        // call heapify-down on the child
+        if (largest != i)
+        {
+            swap(letters[i], letters[largest]);
+            heapify_down(largest);
+        }
+    }
+
+   void heapify_up(int i)
+    {
+        // check if the node at index `i` and its parent violate the heap property
+        if (i && letters.at(Parent(i)).second < letters.at(i).second)
+        {
+            // swap the two if heap property is violated
+            swap(letters[i], letters[Parent(i)]);
+ 
+            // call heapify-up on the parent
+            heapify_up(Parent(i));
+        }
+    }
+public:
+   Huff(/* args */);
+   ~Huff();
+};
+
+Huff::Huff(/* args */)
+{
+}
+
+Huff::~Huff()
+{
+}
 
 void printUncomp(string content)
 {
@@ -15,40 +82,6 @@ void printComp(vector<pair<char, int>> letters)
    
 }
 
-void heapify(vector<pair<char, int>> letters, int i)
-{
-   int n = letters.size();
-   int smallest = i; // node being heaped
-   int l = 2 * i + 1; // left child node 
-	int r = 2 * i + 2; // right child node
-   //cout << "1" << endl;
-
-   if(l < n && letters.at(l).second < letters.at(smallest).second)
-   {
-      smallest = l;
-   }
-
-   if(r < n && letters.at(r).second < letters.at(smallest).second)
-   {
-      smallest = r;
-   }
-   if(smallest != i)
-   {
-      swap(letters.at(i), letters.at(smallest));
-      heapify(letters,smallest);
-   }
-}
-
- vector<pair<char, int>> buildHeap(vector<pair<char, int>> letters)
-{
-
-   int n = letters.size();
-   for(int i = n; i >= 0; i--)
-   {
-      heapify(letters, i);
-   }
-   return letters;
-}
 
 
 // vector<pair<char, int>> sortingLetters(vector<pair<char, int>> letters)
@@ -105,7 +138,7 @@ int main(int argc, char *argv[]) {
    // {
    //    cout <<"'" << letters.at(i).first << "'" << " | " << letters.at(i).second << endl;
    // }
-   letters = buildHeap(letters);
+   letters = (letters);
    for(int i = 0; i < letters.size(); i++)
    {
       cout <<"'" << letters.at(i).first << "'" << " | " << letters.at(i).second << endl;
