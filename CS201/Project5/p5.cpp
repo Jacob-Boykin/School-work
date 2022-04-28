@@ -84,23 +84,7 @@ void printComp(vector<pair<char, int>> letters)
 
 
 
-// vector<pair<char, int>> sortingLetters(vector<pair<char, int>> letters)
-// {
-//    pair<char, int> temp;
-//    for(int i = 0; i < letters.size() - 1; i++)
-//    {
-//       for(int k = 0; k < letters.size() - i - 1; k++)
-//       {
-//          if(letters.at(k).first > letters.at(k + 1).first)
-//          {
-//             temp = letters.at(k);
-//             letters.at(k) = letters.at(k + 1);
-//             letters.at(k + 1) = temp;
-//          }
-//       }
-//    }
-//    return letters;
-// }
+
 
 
 
